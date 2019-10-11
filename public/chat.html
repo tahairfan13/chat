@@ -1,0 +1,20 @@
+<h1>HIJHJSHDJ</h1>
+<input id="input" onchange="change()"></input>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io('http://localhost:3000');
+    console.log(socket.io)
+    socket.on('connect',()=>{
+        console.log(socket.id)
+    })
+
+    function change () {
+        let input = document.getElementById('input')
+        socket.emit('messageToServer',{text: input.value})
+    }
+    socket.on('messageFromServer',(dataFromServer)=>{
+        console.log(dataFromServer);
+        let input = document.getElementById('input')
+        socket.emit('messageToServer',{data: input.value})
+    })
+</script>
